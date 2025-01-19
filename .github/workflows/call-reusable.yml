@@ -39,7 +39,8 @@ jobs:
         run: npm run test
   build:
     needs: test
-    outputs: ${{ steps.artifact.outputs.artifact-name }}
+    outputs: 
+      artifact-name: ${{ steps.artifact.outputs.artifact-name }}
     runs-on: ubuntu-latest
     steps:
       - name: Get code
