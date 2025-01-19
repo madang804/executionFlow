@@ -15,12 +15,15 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
       - name: Setup Node.js
-        id: cache
         uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ hashFiles(**/package-lock.json)}}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
