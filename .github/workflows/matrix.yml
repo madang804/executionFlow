@@ -9,6 +9,12 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         node-version: [12, 14, 16]
+        include:
+          - os: ubuntu-latest
+            node-version: 18
+        exclude:
+          - os: windows-latest
+            node-version: 12
     continue-on-error: true
     runs-on: ${{ matrix.os}}
     steps:
