@@ -60,13 +60,11 @@ jobs:
         id: artifact
         run: |
           echo "artifact-name=dist-build" >> "$GITHUB_OUTPUT"
-          echo "artifact-name=dist-build" >> "$GITHUB_ENV"
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.artifact-name}}
+          name: ${{ steps.artifact.outputs.artifact-name }}
           path: dist
-      
   deploy:
     needs: build
     uses: ./.github/workflows/reusable.yml
