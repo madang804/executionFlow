@@ -55,6 +55,7 @@ jobs:
       - name: Build project
         run: npm run build
       - name: Archive artifacts
+        id: artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist-build
@@ -63,7 +64,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/reusable.yml
     with:
-      artifact-name: dist-build
+      artifact-name: ${{ needs.build.steps.artifact.name}}
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Get code
