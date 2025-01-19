@@ -58,11 +58,13 @@ jobs:
         run: npm run build
       - name: Set output
         id: artifact
-        run: echo "artifact-name=dist-build" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "artifact-name=dist-build" >> "$GITHUB_OUTPUT"
+          echo "artifact-name=dist-build" >> "$GITHUB_ENV"
       - name: Archive artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ outputs.artifact-name}}
+          name: ${{ env.artifact-name}}
           path: dist
       
   deploy:
