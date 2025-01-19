@@ -39,6 +39,7 @@ jobs:
         run: npm run test
   build:
     needs: test
+    outputs: ${{ steps.artifact.with.name }}
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -64,7 +65,7 @@ jobs:
     needs: build
     uses: ./.github/workflows/reusable.yml
     with:
-      artifact-name: ${{ needs.build.steps.artifact.name}}
+      artifact-name: ${{ needs.build.outputs }}
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Get code
