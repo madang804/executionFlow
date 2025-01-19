@@ -56,7 +56,7 @@ jobs:
         run: npm run build
   deploy:
     needs: build
-    uses: .github/workflows/reusable.yml
+    uses: ./.github/workflows/reusable.yml
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Get code
