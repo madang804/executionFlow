@@ -1,0 +1,28 @@
+name: matrix-demo
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubunut-latest, windows-latest, macos-latest]
+        node-version: [12, 14, 16]
+    #continue-on-error: true
+    runs-on: ${{ matrix.os}}
+    steps:
+      - name: Get code
+        uses: actions/chekout@v3
+      - name: Setup Node.js
+        id: cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit == 'false'
+        run: npm ci
+      - name: Build project
+        run: npm run build
