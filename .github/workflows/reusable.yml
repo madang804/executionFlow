@@ -11,7 +11,7 @@ on:
         description: The result of the workflow
         required: false
         type: string
-        value: ${{ jobs.print-result.outputs.job-result}}
+        value: ${{ jobs.print-result.outputs.job-result }}
     # secrets:
     #   GITHUB_TOKEN:
     #     description: Github token
@@ -29,7 +29,7 @@ jobs:
   print-result:
     runs-on: ubuntu-latest
     outputs:
-      job-result: ${{ steps.print.outputs.step-result}}
+      job-result: ${{ steps.print.outputs.step-result }}
     steps:
       - name: Print result
         id: print

@@ -77,8 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get final result
-        uses: ./.github/workflows/reusable.yml
-        run: echo "Final result is ${{ outputs.workflow-result}}"
+        run: echo "Final result is ${{ needs.deploy.outputs.workflow-result }}"
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Get code
