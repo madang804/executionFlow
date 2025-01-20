@@ -70,6 +70,15 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact-name: ${{ needs.build.outputs.artifact-name }}
+      # secrets:
+      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+  final-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get final result
+        uses: ./.github/workflows/reusable.yml
+        run: echo "Final result is ${{ outputs.workflow-result}}"
     # runs-on: ubuntu-latest
     # steps:
     #   - name: Get code
